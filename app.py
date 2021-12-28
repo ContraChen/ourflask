@@ -28,6 +28,7 @@ class Website(db.Model):
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     name = db.Column(db.String(48), unique=True)
     address = db.Column(db.String(192))
+    star = db.Column(db.Boolean)
     folder_id = db.Column(db.Integer, db.ForeignKey("folders.id"))  # 设置外键
 
 #回收站收藏夹模型
@@ -44,22 +45,6 @@ class BinWebsite(db.Model):
     name = db.Column(db.String(48), unique=True)
     address = db.Column(db.String(192))
     binfolder_id = db.Column(db.Integer, db.ForeignKey("binfolders.id"))  # 设置外键
-
-# #回收站收藏夹模型
-# class BinFloder():
-#     __tablename__ = "binfolders"
-#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-#     name = db.Column(db.String(48), unique=True)
-#     # 一个作者中有多个书籍对象，books就是书籍的集合对象
-#     binwebsites = db.relationship("BinWebsite", backref="binfolder")  # 关系属性
-#
-# #回收站网址模型
-# class BinWebsite(db.Model):
-#     __tablename__ = "binwebsites"
-#     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
-#     name = db.Column(db.String(48), unique=True)
-#     address = db.Column(db.String(192))
-#     binfolder_id = db.Column(db.Integer, db.ForeignKey("binfolders.id"))  # 设置外键
 
 @app.route('/',methods=["GET","POST"])
 def home():
