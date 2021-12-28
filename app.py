@@ -8,12 +8,58 @@ app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
 
-#登录模型
+#用户模型
 class User(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True, nullable=False)
     password = db.Column(db.String(128))
+
+#收藏夹模型
+class Folder(db.Model):
+    __tablename__ = "folders"
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    name = db.Column(db.String(48), unique=True)
+    websites = db.relationship("Website", backref="folder")  # 关系属性
+
+# 网址模型
+class Website(db.Model):
+    __tablename__ = "websites"
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    name = db.Column(db.String(48), unique=True)
+    address = db.Column(db.String(192))
+    folder_id = db.Column(db.Integer, db.ForeignKey("folders.id"))  # 设置外键
+
+#回收站收藏夹模型
+class BinFolder(db.Model):
+    __tablename__ = "binfolders"
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    name = db.Column(db.String(48), unique=True)
+    binwebsites = db.relationship("BinWebsite", backref="binfolder")  # 关系属性
+
+# 回收站网址模型
+class BinWebsite(db.Model):
+    __tablename__ = "binwebsites"
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    name = db.Column(db.String(48), unique=True)
+    address = db.Column(db.String(192))
+    binfolder_id = db.Column(db.Integer, db.ForeignKey("binfolders.id"))  # 设置外键
+
+# #回收站收藏夹模型
+# class BinFloder():
+#     __tablename__ = "binfolders"
+#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+#     name = db.Column(db.String(48), unique=True)
+#     # 一个作者中有多个书籍对象，books就是书籍的集合对象
+#     binwebsites = db.relationship("BinWebsite", backref="binfolder")  # 关系属性
+#
+# #回收站网址模型
+# class BinWebsite(db.Model):
+#     __tablename__ = "binwebsites"
+#     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+#     name = db.Column(db.String(48), unique=True)
+#     address = db.Column(db.String(192))
+#     binfolder_id = db.Column(db.Integer, db.ForeignKey("binfolders.id"))  # 设置外键
 
 @app.route('/',methods=["GET","POST"])
 def home():
