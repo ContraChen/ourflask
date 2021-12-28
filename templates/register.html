@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+</head>
+<body>
+<h1>用户注册</h1>
+   {{ msg }}
+<form method="post" action="/register">
+    <label>用户名:   </label><input type="text" name="username" placeholder="请输入用户名"><br/>
+    <label>密码:    </label><input type="password" name="password" placeholder="请输入密码"><br/>
+    <input type="submit" value="注册">
+    <br/><br/>
+    <a href="/login">去登录</a>
+</form>
+
+</body>
+</html>
