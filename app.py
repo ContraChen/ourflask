@@ -142,6 +142,35 @@ def bin():
     binfolders = BinFolder.query.all()
     return render_template('bin.html',binfolders=binfolders)
 
+@app.route("/restore_binfolder")
+def restore_binfolder():
+    fid = request.args.get('fid')
+    binfolder = BinFolder.query.get(fid)
+    binwebsites = binfolder.binwebsites
+    folder = Folder.query.filter_by(name=binfolder.name).first()
+    if folder:
+        for binwebsite in binwebsites:
+            new_website = Website(name=binwebsite.name, address=binwebsite.address)
+            folder.websites.append(new_website)
+            db.session.add(new_website)
+            db.session.add_all([folder])
+            db.session.commit()
+            db.session.delete(binwebsite)
+            db.session.commit()
+    else:
+        new_folder = Folder(name=binfolder.name)
+        for binwebsite in binwebsites:
+            new_website = Website(name=binwebsite.name, address=binwebsite.address)
+            new_folder.websites.append(new_website)
+            db.session.add(new_website)
+            db.session.add_all([new_folder])
+            db.session.commit()
+            db.session.delete(binwebsite)
+            db.session.commit()
+    db.session.delete(binfolder)
+    db.session.commit()
+    return redirect("/bin")
+
 @app.route("/delete_binwebsite")
 def delete_binwebsite():
     wid = request.args.get('wid')
@@ -173,9 +202,27 @@ def delete_website():
 def delete_folder():
     fid = request.args.get('fid')
     folder = Folder.query.get(fid)
-    websites=folder.websites
-    for website in websites:
-        db.session.delete(website)
+    websites = folder.websites
+    binfolder = BinFolder.query.filter_by(name=folder.name).first()
+    if binfolder:
+        for website in websites:
+            new_binwebsite = BinWebsite(name=website.name, address=website.address)
+            binfolder.binwebsites.append(new_binwebsite)
+            db.session.add(new_binwebsite)
+            db.session.add_all([binfolder])
+            db.session.commit()
+            db.session.delete(website)
+            db.session.commit()
+    else:
+        new_binfolder = BinFolder(name=folder.name)
+        for website in websites:
+            new_binwebsite = BinWebsite(name=website.name, address=website.address)
+            new_binfolder.binwebsites.append(new_binwebsite)
+            db.session.add(new_binwebsite)
+            db.session.add_all([new_binfolder])
+            db.session.commit()
+            db.session.delete(website)
+            db.session.commit()
     db.session.delete(folder)
     db.session.commit()
     return redirect("/save")

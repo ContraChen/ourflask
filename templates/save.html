@@ -40,10 +40,10 @@
 <hr>
 <ul>
     {% for folder in folders %}
-        <li>{{ folder.name }}<a href="/delete_binfolder?fid={{ folder.id  }}"> 删除</a></li>
+        <li>{{ folder.name }}<a href="/delete_folder?fid={{ folder.id  }}">&nbsp;&nbsp;回收&nbsp;</a></li>
         <ul>
             {% for website in folder.websites %}
-                <li>{{ website.name }} <a href="/delete_binwebsite?wid={{ website.id }}"> 删除</a></li>
+                <li>{{ website.name }}<a href="/delete_website?wid={{ website.id }}">&nbsp;&nbsp;彻底删除</a></li>
                 {% if website.star == 1 %}
                     <a href="/star?wid={{ website.id }}"><img src='https://raw.githubusercontent.com/ContraChen/picBed/master/img/202112281735013.png' width="24px" height="24px" border=0></a>
                 {% else %}

@@ -18,12 +18,16 @@
     </div>
     </div>
 <hr>
+    <a href="/save"><div style="float:right;">&nbsp;收藏管理&nbsp;&nbsp;</div></a>
         <ul>
     {% for binfolder in binfolders %}
-        <li>{{ binfolder.name }}<a href="/delete_binfolder?fid={{ binfolder.id  }}"> 删除</a></li>
+        <li>{{ binfolder.name }}
+            <a href="/delete_binfolder?fid={{ binfolder.id  }}"> 彻底删除</a>
+            <a href="/restore_binfolder?fid={{ binfolder.id  }}"> 恢复收藏夹</a>
+        </li>
         <ul>
             {% for binwebsite in binfolder.binwebsites %}
-                <li>{{ binwebsite.name }} <a href="/delete_binwebsite?wid={{ binwebsite.id }}"> 删除</a></li>
+                <li>{{ binwebsite.name }} <a href="/delete_binwebsite?wid={{ binwebsite.id }}"> 彻底删除</a></li>
                 &nbsp;&nbsp;<a href={{ binwebsite.address }}>{{ binwebsite.address }}</a>
             {% endfor %}
         </ul>
