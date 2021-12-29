@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session,jsonify
 from flask_sqlalchemy import SQLAlchemy
+import pymysql
 from config import Config
 import Func as fc
 
@@ -137,6 +138,10 @@ def collect():
     folders = Folder.query.all()
     return render_template('collect.html',folders=folders)
 
+@app.route("/plots")
+def plots():
+    return render_template('plots.html')
+
 @app.route("/bin")
 def bin():
     binfolders = BinFolder.query.all()
@@ -150,7 +155,7 @@ def restore_binfolder():
     folder = Folder.query.filter_by(name=binfolder.name).first()
     if folder:
         for binwebsite in binwebsites:
-            new_website = Website(name=binwebsite.name, address=binwebsite.address)
+            new_website = Website(name=binwebsite.name, address=binwebsite.address,star=0)
             folder.websites.append(new_website)
             db.session.add(new_website)
             db.session.add_all([folder])
@@ -160,7 +165,7 @@ def restore_binfolder():
     else:
         new_folder = Folder(name=binfolder.name)
         for binwebsite in binwebsites:
-            new_website = Website(name=binwebsite.name, address=binwebsite.address)
+            new_website = Website(name=binwebsite.name, address=binwebsite.address,star=0)
             new_folder.websites.append(new_website)
             db.session.add(new_website)
             db.session.add_all([new_folder])
@@ -226,6 +231,28 @@ def delete_folder():
     db.session.delete(folder)
     db.session.commit()
     return redirect("/save")
+
+@app.route('/getfolder')
+def getfolder():  # put application's code here
+    conn = pymysql.connect(host='127.0.0.1',user='root',password='123456',db='ourflask')
+    cur = conn.cursor()
+    sql = 'SELECT a.name,COUNT(b.name) FROM websites b,FOLDERS a WHERE b.folder_id=a.id GROUP BY a.name'
+    cur.execute(sql)
+    u=cur.fetchall()
+    jsonData = {}
+    foldername = []
+    websitecount = []
+
+    for data in u:
+        foldername.append(data[0])
+        websitecount.append(data[1])
+
+    jsonData['foldername'] = foldername
+    jsonData['websitecount'] = websitecount
+
+    cur.close()
+    conn.close()
+    return jsonify(jsonData)
 
 if __name__ == '__main__':
     app.run()

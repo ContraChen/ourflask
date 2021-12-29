@@ -13,11 +13,6 @@
             color: white;
         }
     </style>
-    <style>
-        body{
-            margin: 0;
-        }
-    </style>
 </head>
 <body>
 <div class="pg-header">
@@ -37,10 +32,11 @@
     <a href="/collect">打开星标收藏</a>
     <a href="/bin">&nbsp;&nbsp;回收站</a>
     <a href="/">&nbsp;&nbsp;退出登录</a>
+    <a href="/plots">&nbsp;&nbsp;数据查看</a>
 <hr>
 <ul>
     {% for folder in folders %}
-        <li>{{ folder.name }}<a href="/delete_folder?fid={{ folder.id  }}">&nbsp;&nbsp;回收&nbsp;</a></li>
+        <li>{{ folder.name }}&nbsp;&nbsp;&nbsp;&nbsp;<a href="/delete_folder?fid={{ folder.id  }}">回收</a></li>
         <ul>
             {% for website in folder.websites %}
                 <li>{{ website.name }}<a href="/delete_website?wid={{ website.id }}">&nbsp;&nbsp;彻底删除</a></li>

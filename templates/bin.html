@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
     <style>
+        body{
+            margin: 0;
+        }
+        a{
+            margin: 0;
+        }
         .pg-header{
             height: 48px;
             background-color: #8b8785;
@@ -18,11 +24,11 @@
     </div>
     </div>
 <hr>
-    <a href="/save"><div style="float:right;">&nbsp;收藏管理&nbsp;&nbsp;</div></a>
+    <a href="/save"><div>收藏管理</div></a>
         <ul>
     {% for binfolder in binfolders %}
-        <li>{{ binfolder.name }}
-            <a href="/delete_binfolder?fid={{ binfolder.id  }}"> 彻底删除</a>
+        <li>{{ binfolder.name }}&nbsp;&nbsp;
+            <a href="/delete_binfolder?fid={{ binfolder.id  }}">彻底删除</a>&nbsp;&nbsp;
             <a href="/restore_binfolder?fid={{ binfolder.id  }}"> 恢复收藏夹</a>
         </li>
         <ul>
