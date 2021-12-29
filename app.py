@@ -96,7 +96,7 @@ def save():
         website = Website.query.filter_by(address=website_address).first()
         if website:
             return render_template('save.html', msg='网址已存在', folders=folders)
-        new_website = Website(name=website_name, address=website_address)
+        new_website = Website(name=website_name, address=website_address,star=0)
         folder.websites.append(new_website)
         db.session.add(new_website)
         db.session.commit()
@@ -107,7 +107,7 @@ def save():
         if website:
             return render_template('save.html', msg='网址已存在', folders=folders)
         new_folder = Folder(name=folder_name)
-        new_website = Website(name=website_name, address=website_address)
+        new_website = Website(name=website_name, address=website_address,star=0)
         new_folder.websites.append(new_website)
         db.session.add(new_website)
         db.session.add_all([new_folder])
@@ -123,6 +123,19 @@ def star():
     website.star = 1-website.star
     db.session.commit()
     return redirect("/save")
+
+@app.route("/undostar")
+def undostar():
+    wid = request.args.get('wid')
+    website = Website.query.get(wid)
+    website.star = 1-website.star
+    db.session.commit()
+    return redirect("/collect")
+
+@app.route("/collect")
+def collect():
+    folders = Folder.query.all()
+    return render_template('collect.html',folders=folders)
 
 @app.route("/delete_website")
 def delete_website():

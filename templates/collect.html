@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>星标文件</title>
+</head>
+<body>
+    <h1>我的星标</h1>
+    <hr>
+    <a href="/save">返回到收藏夹</a>
+<ul>
+    {% for folder in folders %}
+        <li>{{ folder.name }}</li>
+        <ul>
+            {% for website in folder.websites %}
+                {% if website.star == 1 %}
+                    <li>{{ website.name }}<a href="/undostar?wid={{ website.id  }}">取消星标</a></li>
+                    &nbsp;&nbsp;<a href={{ website.address }}>{{ website.address }}</a>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

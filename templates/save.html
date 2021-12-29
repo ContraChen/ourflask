@@ -13,9 +13,8 @@
     <label>URL:  </label><input type="text" name="website_address" placeholder="请输入URL"><br/>
     <input type="submit" value="保存">
 </form>
-
+    <a href="/collect">打开星标收藏</a>
 <hr>
-
 <ul>
     {% for folder in folders %}
         <li>{{ folder.name }}<a href="/delete_folder?fid={{ folder.id  }}"> 删除</a></li>
