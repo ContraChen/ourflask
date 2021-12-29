@@ -1,17 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <style>
+        body{
+            margin: 0;
+        }
+        .pg-header{
+            height: 54px;
+            font-size: 42px ;
+            background-color: #8b8785;
+            color: white;
+            margin: 0;
+        }
+        video{
+            margin: 0px;
+            padding: 0px;
+            position: fixed;
+            right: 0px;
+            bottom: 0px;
+            min-width: 100%;
+            min-height: 100%;
+            height: auto;
+            width: auto;
+            /*加滤镜*/
+            /*filter: blur(15px); //背景模糊设置 */
+            /*-webkit-filter: grayscale(100%);*/
+            /*filter:grayscale(100%); //背景灰度设置*/
+            z-index:-11
+        }
+        source{
+            min-width: 100%;
+            min-height: 100%;
+            height: auto;
+            width: auto;
+        }
+		p{
+		    width: 100%;
+			text-align: center;
+			font-size: 40px;
+			color: white;
+		}
+        a{
+            color: white;
+            border-color: aquamarine;
+            font-size: 20px;
+        }
+        form{
+            background-color: rgba(93,216,224,0.18);
+            color: white;
+            border-color: chartreuse;
+            font-size: 24px;
+        }
+
+    </style>
+
     <meta charset="UTF-8">
-    <title>登录</title>
+    <title>系统主页</title>
 </head>
 <body>
-<h1>用户登录</h1>
-<hr>
-{{error}}
-<form action="/login" method="post">
-    用户名:<input type="text" name="username"><br>
-    密码:<input type="password" name="password"><br>
-    <input type="submit" value="提交">
-</form>
+<div class="pg-header">
+    <div style="width: 250px;margin: auto">登录界面</div>
+</div>
+<div class="links">
+    <a href="/register"><div style="float:right;">&nbsp;&nbsp;注册&nbsp;</div></a>
+    <a href="/"><div style="float:right;">&nbsp;登录&nbsp;&nbsp;|</div></a>
+</div>
+<div style="width: 360px;height: 500px;left: 80px; top:80px;">
+        <form action="/login" method="post" name="form1">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ error }}<br>
+            &nbsp;&nbsp;&nbsp;账号:<input style="font-size: 20px" type="text" name="username" ><br>
+            &nbsp;&nbsp;&nbsp;密码:<input style="font-size: 20px" type="password" name="password"><br>
+            <input style="position:relative; left:10px; font-size: 18px" type="button" value="登录" type="submit" onclick="form1.action='/';form1.submit();"/>
+            <input style="position:relative; left:160px; font-size: 18px"  type="button" value="去注册" type="submit" onclick="form1.action='/register';form1.submit();"/>
+        </form>
+</div>
+<div>
+    <video autoplay loop muted>
+        <source src="https://cdn.jsdelivr.net/gh/MobiusBeta/assets/videos/lime-live-wallpapers/Live4.mp4"  />
+        Your browser does not support the video tag.
+    </video>
+</div>
 </body>
 </html>

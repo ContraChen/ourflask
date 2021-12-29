@@ -5,6 +5,34 @@
     <title>收藏夹界面</title>
 </head>
 <body>
+<h1>收藏管理</h1>
+   {{ msg }}
+<form method="post" action="/save">
+    <label>收藏夹名:  </label><input type="text" name="folder_name" placeholder="请输入收藏夹名"><br/>
+    <label>网址名: </label><input type="text" name="website_name" placeholder="请输入网址名"><br/>
+    <label>URL:  </label><input type="text" name="website_address" placeholder="请输入URL"><br/>
+    <input type="submit" value="保存">
+</form>
+
+<hr>
+
+<ul>
+    {% for folder in folders %}
+        <li>{{ folder.name }}<a href="/delete_folder?fid={{ folder.id  }}"> 删除</a></li>
+        <ul>
+            {% for website in folder.websites %}
+                <li>{{ website.name }} <a href="/delete_website?wid={{ website.id }}"> 删除</a></li>
+                {% if website.star == 1 %}
+                    <a href="/star?wid={{ website.id }}"><img src='https://raw.githubusercontent.com/ContraChen/picBed/master/img/202112281735013.png' width="24px" height="24px" border=0></a>
+                {% else %}
+                    <a href="/star?wid={{ website.id }}"><img src='https://raw.githubusercontent.com/ContraChen/picBed/master/img/202112281731903.png' width="24px" height="24px" border=0></a>
+                {% endif %}
+                &nbsp;&nbsp;<a href={{ website.address }}>{{ website.address }}</a>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</ul>
+
 
 </body>
 </html>
