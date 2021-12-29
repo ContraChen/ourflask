@@ -3,9 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>收藏夹界面</title>
+      <style>
+        body{
+            margin: 0;
+        }
+        .pg-header{
+            height: 48px;
+            background-color: #8b8785;
+            color: white;
+        }
+    </style>
+    <style>
+        body{
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
+<div class="pg-header">
+<div style="width: 150px;margin: auto">
 <h1>收藏管理</h1>
+</div>
+</div>
+</div><br>
+<div style="width: 360px;margin:0 auto;">
    {{ msg }}
 <form method="post" action="/save">
     <label>收藏夹名:  </label><input type="text" name="folder_name" placeholder="请输入收藏夹名"><br/>
@@ -14,13 +35,15 @@
     <input type="submit" value="保存">
 </form>
     <a href="/collect">打开星标收藏</a>
+    <a href="/bin">&nbsp;&nbsp;回收站</a>
+    <a href="/">&nbsp;&nbsp;退出登录</a>
 <hr>
 <ul>
     {% for folder in folders %}
-        <li>{{ folder.name }}<a href="/delete_folder?fid={{ folder.id  }}"> 删除</a></li>
+        <li>{{ folder.name }}<a href="/delete_binfolder?fid={{ folder.id  }}"> 删除</a></li>
         <ul>
             {% for website in folder.websites %}
-                <li>{{ website.name }} <a href="/delete_website?wid={{ website.id }}"> 删除</a></li>
+                <li>{{ website.name }} <a href="/delete_binwebsite?wid={{ website.id }}"> 删除</a></li>
                 {% if website.star == 1 %}
                     <a href="/star?wid={{ website.id }}"><img src='https://raw.githubusercontent.com/ContraChen/picBed/master/img/202112281735013.png' width="24px" height="24px" border=0></a>
                 {% else %}
@@ -31,7 +54,7 @@
         </ul>
     {% endfor %}
 </ul>
-
+</div>
 
 </body>
 </html>

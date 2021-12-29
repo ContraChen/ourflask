@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .pg-header{
+            height: 48px;
+            background-color: #8b8785;
+            color: white;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>回收站界面</title>
+</head>
+<body>
+    <div class="pg-header">
+    <div style="width: 150px;margin: auto">
+    <h1>回收站</h1>
+    </div>
+    </div>
+<hr>
+        <ul>
+    {% for binfolder in binfolders %}
+        <li>{{ binfolder.name }}<a href="/delete_binfolder?fid={{ binfolder.id  }}"> 删除</a></li>
+        <ul>
+            {% for binwebsite in binfolder.binwebsites %}
+                <li>{{ binwebsite.name }} <a href="/delete_binwebsite?wid={{ binwebsite.id }}"> 删除</a></li>
+                &nbsp;&nbsp;<a href={{ binwebsite.address }}>{{ binwebsite.address }}</a>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</ul>
+
+
+</body>
+</html>

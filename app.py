@@ -137,6 +137,30 @@ def collect():
     folders = Folder.query.all()
     return render_template('collect.html',folders=folders)
 
+@app.route("/bin")
+def bin():
+    binfolders = BinFolder.query.all()
+    return render_template('bin.html',binfolders=binfolders)
+
+@app.route("/delete_binwebsite")
+def delete_binwebsite():
+    wid = request.args.get('wid')
+    binwebsite = BinWebsite.query.get(wid)
+    db.session.delete(binwebsite)
+    db.session.commit()
+    return redirect("/bin")
+
+@app.route("/delete_binfolder")
+def delete_binfolder():
+    fid = request.args.get('fid')
+    binfolder = BinFolder.query.get(fid)
+    binwebsites=binfolder.binwebsites
+    for binwebsite in binwebsites:
+        db.session.delete(binwebsite)
+    db.session.delete(binfolder)
+    db.session.commit()
+    return redirect("/bin")
+
 @app.route("/delete_website")
 def delete_website():
     wid = request.args.get('wid')
@@ -146,7 +170,7 @@ def delete_website():
     return redirect("/save")
 
 @app.route("/delete_folder")
-def delete_author():
+def delete_folder():
     fid = request.args.get('fid')
     folder = Folder.query.get(fid)
     websites=folder.websites

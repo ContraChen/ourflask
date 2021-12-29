@@ -3,11 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>星标文件</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        .pg-header{
+            height: 48px;
+            background-color: #8b8785;
+            color: #4c2eff;
+        }
+    </style>
+    <style>
+        body{
+            margin: 0;
+        }
+         .pg-content{
+            height: 48px;
+            color: black;
+        }
+    </style>
 </head>
 <body>
+
+<div class="pg-header">
+    <div style="width: 150px;margin: auto">
     <h1>我的星标</h1>
     <hr>
+
     <a href="/save">返回到收藏夹</a>
+    </div>
+</div><br><br><br><br><br><br><br><br><br>
+<div class="pg-content">
+    <div style="width: 360px;margin:0 auto;">
 <ul>
     {% for folder in folders %}
         <li>{{ folder.name }}</li>
@@ -21,6 +48,8 @@
         </ul>
     {% endfor %}
 </ul>
+</div>
+</div>
 
 </body>
 </html>
