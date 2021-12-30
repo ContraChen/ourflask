@@ -36,14 +36,16 @@
 <hr>
 <ul>
     {% for folder in folders %}
-        <li>{{ folder.name }}&nbsp;&nbsp;&nbsp;&nbsp;<a href="/delete_folder?fid={{ folder.id  }}">回收</a></li>
+        <li>{{ folder.name }}&nbsp;&nbsp;&nbsp;&nbsp;<a href="/detail_folder?fid={{ folder.id  }}">详情</a><!--<a href="/detail_folder?fid={{ folder.id  }}">&nbsp;&nbsp;更新</a>--></li>
         <ul>
             {% for website in folder.websites %}
-                <li>{{ website.name }}<a href="/delete_website?wid={{ website.id }}">&nbsp;&nbsp;彻底删除</a></li>
+                <li>{{ website.name }}<!--<a href="/delete_website?wid={{ website.id }}">&nbsp;&nbsp;彻底删除</a>--><a href="/detail_website?wid={{ website.id  }}">&nbsp;&nbsp;详情</a></li>
                 {% if website.star == 1 %}
-                    <a href="/star?wid={{ website.id }}"><img src='https://raw.githubusercontent.com/ContraChen/picBed/master/img/202112281735013.png' width="24px" height="24px" border=0></a>
+                   <!--<a href="/star?wid={{ website.id }}"><img src='https://raw.githubusercontent.com/ContraChen/picBed/master/img/202112281735013.png' width="24px" height="24px" border=0></a>-->
+                    <a href="/star?wid={{ website.id }}"><img src='http://img1.3png.com/418493cbb41f9ccf031bc9a81967f6878235.png' width="24px" height="24px" border=0></a>
                 {% else %}
-                    <a href="/star?wid={{ website.id }}"><img src='https://raw.githubusercontent.com/ContraChen/picBed/master/img/202112281731903.png' width="24px" height="24px" border=0></a>
+                    <!--<a href="/star?wid={{ website.id }}"><img src='https://raw.githubusercontent.com/ContraChen/picBed/master/img/202112281731903.png' width="24px" height="24px" border=0></a>-->
+                    <a href="/star?wid={{ website.id }}"><img src='http://img1.3png.com/7234936b4f9d4fc4dfc8532675596ea953b7.png' width="24px" height="24px" border=0></a>
                 {% endif %}
                 &nbsp;&nbsp;<a href={{ website.address }}>{{ website.address }}</a>
             {% endfor %}

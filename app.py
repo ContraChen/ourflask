@@ -195,6 +195,49 @@ def delete_binfolder():
     db.session.commit()
     return redirect("/bin")
 
+@app.route('/detail_folder')
+def query_folder():
+    fid=int(request.args.get("fid"))
+    # 到数据库查询博文详情,get方法是根据id查询(查询一条博文数据)
+    folder = Folder.query.get(fid)
+    # 渲染博文详情页面
+    return render_template('query_folder.html',folder = folder)
+
+@app.route('/detail_website')
+def query_website():
+    wid=int(request.args.get("wid"))
+    # 到数据库查询博文详情,get方法是根据id查询(查询一条博文数据)
+    website = Website.query.get(wid)
+    # 渲染博文详情页面
+    return render_template('query_website.html',website = website)
+
+@app.route('/update_folder',methods = ['GET', 'POST'])
+def update_folder():
+    if request.method == 'GET':
+        fid = int(request.args.get("fid"))
+        folder = Folder.query.get(fid)
+        return render_template('update_folder.html',folder = folder)
+    else:
+        folder_name = request.form['folder_name']
+        fid = int(request.form['fid'])
+        Folder.query.filter_by(id = fid).update({'name':folder_name})
+        db.session.commit()
+        return redirect('/detail_folder?fid='+str(fid))
+
+@app.route("/update_website",methods = ['GET', 'POST'])
+def update_website():
+    if request.method == 'GET':
+        wid = int(request.args.get("wid"))
+        website = Website.query.get(wid)
+        return render_template('update_website.html',website = website)
+    else:
+        website_name = request.form['website_name']
+        website_address = request.form['website_address']
+        wid = int(request.form['wid'])
+        Website.query.filter_by(id = wid).update({'name':website_name,'address':website_address})
+        db.session.commit()
+        return redirect('/detail_website?wid='+str(wid))
+
 @app.route("/delete_website")
 def delete_website():
     wid = request.args.get('wid')

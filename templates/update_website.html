@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>更新网址信息</title>
+</head>
+<body style="margin: 0 auto">
+<form method="post" action="/update_website">
+    <label>网址名: </label>
+    <input style="font-size: 20px" type="text" name="website_name" value="{{ website.name }}" placeholder="请输入网址名">
+    <br/><br/>
+    <label>URL:  </label>
+    <input style="font-size: 20px" type="text" name="website_address" value="{{ website.address }}" placeholder="请输入URL">
+    <input type="hidden" name="wid" value="{{website.id}}">
+    <br/>
+    <input type="submit" value="更新">
+</form>
+</body>
+</html>

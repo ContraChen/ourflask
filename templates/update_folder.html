@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>重命名收藏夹</title>
+</head>
+<body style="margin: 0 auto">
+<form method="post" action="/update_folder">
+    <label>收藏夹名: </label>
+    <input style="font-size: 20px" type="text" name="folder_name" value="{{ folder.name }}" placeholder="请输入收藏夹名">
+    <br><br>
+    <input type="hidden" name="fid" value="{{folder.id}}">
+    <br/>
+    <input type="submit" value="修改">
+</form>
+
+</body>
+</html>
