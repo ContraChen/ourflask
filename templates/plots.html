@@ -5,10 +5,12 @@
     <title>图表分析页面</title>
     <style>
         body{
+            background-color: #B0B0AE;
             margin: 0;
         }
         .pg-header{
-            height: 48px;
+            height: 54px;
+            font-size: 42px;
             background-color: #8b8785;
             color: white;
         }
@@ -26,15 +28,16 @@
 </head>
 <body>
 <div class="pg-header">
-    <div style="width: 150px;margin: auto">
-        <h1>数据图像</h1>
-    </div>
-    <a href="/"><div style="float:right;">&nbsp;&nbsp;退出登录&nbsp;</div></a>
+    <div style="width: 250px;margin:0 auto;">数据图像</div>
+</div>
+    <a href="/"><div style="float:right;">&nbsp;&nbsp;退出登录&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></a>
     <a href="/save"><div style="float:right;">&nbsp;收藏管理&nbsp;&nbsp;|</div></a>
 </div>
+<div style="width: 385px;margin: auto">
 <input style="font-size: 20px" type="button" value="收藏夹网址数对比" onclick="showBar()">&nbsp;&nbsp;
 <input style="font-size: 20px" type="button" value="收藏夹网址数占比" onclick="showPie()">&nbsp;&nbsp;
-<div id="bardemo" style="width: 600px;height:300px;margin: 0 auto;"></div>
+</div>
+<div id="bardemo" style="width: 750px;height:400px;margin: 0 auto;float:left;"></div>
 <script type="text/javascript">
     function showBar(){
         $.ajax({
@@ -43,7 +46,7 @@
             success: function (result){
                 var option ={
                     title:{
-                        text:'收藏夹和对应网址数量'
+                        text:'收藏夹网址数对比'
                     },
                     tooltip:{show:true},
                     toolbox:{
@@ -82,7 +85,7 @@
     }
 </script>
 
-<div id="piedemo" style="width: 600px;height:300px;margin: 0 auto;"></div>
+<div id="piedemo" style="width: 750px;height:400px;margin: 0 auto;float:right;"></div>
 <script type="text/javascript">
     function showPie(){
         var dataarray=[];
@@ -98,7 +101,7 @@
                 }
                 var option ={
                     title:{
-                        text:'网址数量'
+                        text:'收藏夹网址数占比'
                     },
                     tooltip:{
                         trigger:"item",

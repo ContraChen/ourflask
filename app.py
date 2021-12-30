@@ -67,6 +67,7 @@ def register():
             db.session.commit()
             return render_template('login.html', error='注册成功，欢迎登录')
 
+#主页路由：登录界面
 @app.route('/',methods=["GET","POST"])
 def login():
     #request：请求对象
@@ -82,6 +83,7 @@ def login():
         else:
             return render_template('login.html',error='用户名或密码错误')
 
+#收藏管理
 @app.route('/save',methods=["GET","POST"])
 def save():
     folders = Folder.query.all()
@@ -116,6 +118,7 @@ def save():
         folders = Folder.query.all()
         return render_template('save.html', msg='添加成功', folders=folders)
 
+#星标点亮与熄灭
 @app.route("/star")
 def star():
     wid = request.args.get('wid')
@@ -125,6 +128,7 @@ def star():
     db.session.commit()
     return redirect("/save")
 
+#星标管理页取消星标
 @app.route("/undostar")
 def undostar():
     wid = request.args.get('wid')
@@ -133,20 +137,24 @@ def undostar():
     db.session.commit()
     return redirect("/collect")
 
+#收藏
 @app.route("/collect")
 def collect():
     folders = Folder.query.all()
     return render_template('collect.html',folders=folders)
 
+#绘制数据分析图
 @app.route("/plots")
 def plots():
     return render_template('plots.html')
 
+#回收站页面
 @app.route("/bin")
 def bin():
     binfolders = BinFolder.query.all()
     return render_template('bin.html',binfolders=binfolders)
 
+#恢复文件夹
 @app.route("/restore_binfolder")
 def restore_binfolder():
     fid = request.args.get('fid')
@@ -176,6 +184,7 @@ def restore_binfolder():
     db.session.commit()
     return redirect("/bin")
 
+#彻底删除回收站网址文件
 @app.route("/delete_binwebsite")
 def delete_binwebsite():
     wid = request.args.get('wid')
@@ -184,6 +193,7 @@ def delete_binwebsite():
     db.session.commit()
     return redirect("/bin")
 
+#删除回收站文件夹
 @app.route("/delete_binfolder")
 def delete_binfolder():
     fid = request.args.get('fid')
@@ -195,22 +205,21 @@ def delete_binfolder():
     db.session.commit()
     return redirect("/bin")
 
+#文件夹详情
 @app.route('/detail_folder')
 def query_folder():
     fid=int(request.args.get("fid"))
-    # 到数据库查询博文详情,get方法是根据id查询(查询一条博文数据)
     folder = Folder.query.get(fid)
-    # 渲染博文详情页面
     return render_template('query_folder.html',folder = folder)
 
+#网址详情
 @app.route('/detail_website')
 def query_website():
     wid=int(request.args.get("wid"))
-    # 到数据库查询博文详情,get方法是根据id查询(查询一条博文数据)
     website = Website.query.get(wid)
-    # 渲染博文详情页面
     return render_template('query_website.html',website = website)
 
+#更新文件夹
 @app.route('/update_folder',methods = ['GET', 'POST'])
 def update_folder():
     if request.method == 'GET':
@@ -224,6 +233,7 @@ def update_folder():
         db.session.commit()
         return redirect('/detail_folder?fid='+str(fid))
 
+#更新网址信息
 @app.route("/update_website",methods = ['GET', 'POST'])
 def update_website():
     if request.method == 'GET':
@@ -238,6 +248,7 @@ def update_website():
         db.session.commit()
         return redirect('/detail_website?wid='+str(wid))
 
+#删除网址
 @app.route("/delete_website")
 def delete_website():
     wid = request.args.get('wid')
@@ -246,6 +257,7 @@ def delete_website():
     db.session.commit()
     return redirect("/save")
 
+#回收文件夹
 @app.route("/delete_folder")
 def delete_folder():
     fid = request.args.get('fid')
@@ -275,6 +287,7 @@ def delete_folder():
     db.session.commit()
     return redirect("/save")
 
+#图表分析获取文件夹
 @app.route('/getfolder')
 def getfolder():  # put application's code here
     conn = pymysql.connect(host='127.0.0.1',user='root',password='123456',db='ourflask')
@@ -285,14 +298,11 @@ def getfolder():  # put application's code here
     jsonData = {}
     foldername = []
     websitecount = []
-
     for data in u:
         foldername.append(data[0])
         websitecount.append(data[1])
-
     jsonData['foldername'] = foldername
     jsonData['websitecount'] = websitecount
-
     cur.close()
     conn.close()
     return jsonify(jsonData)

@@ -3,29 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <title>收藏夹详情</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        .pg-header{
+            height: 55px;
+            font-size: 42px ;
+            background-color: #8b8785;
+            color: white;
+        }
+        video{
+            margin: 0px;
+            padding: 0px;
+            position: fixed;
+            right: 0px;
+            bottom: 0px;
+            min-width: 100%;
+            min-height: 100%;
+            height: auto;
+            width: auto;
+            /*加滤镜*/
+            /*filter: blur(15px); //背景模糊设置 */
+            /*-webkit-filter: grayscale(100%);*/
+            /*filter:grayscale(100%); //背景灰度设置*/
+            z-index:-11
+        }
+        ul{
+            background-color: rgba(93,216,224,0.18);
+            color: black;
+            border-color: chartreuse;
+            font-size: 24px;
+        }
+    </style>
 </head>
 <body>
-<h3><a href="/save">回到收藏列表</a></h3>
-<h1>网址详情</h1>
+
+<div class="pg-header">
+<div style="width: 250px;margin:0 auto;">
+收藏夹详情
+</div></div>
+<div style="width: 150px;margin:0 auto;">
+    <h3><a href="/save">回到收藏列表</a></h3>
+</div><br><br><br><br>
+
+<div style="width: 500px;margin:0 auto;">
+<ul>
 <div>
     <h3>{{folder.name}}</h3>
     <p>{{folder.address}}</p>
-     <a href="/update_folder?fid={{folder.id}}">重命名</a>
+     <a href="/update_folder?fid={{folder.id}}">更新</a>
     <a href="/delete_folder?fid={{folder.id}}">回收</a>
     <hr>
-<ul>
+
     {% for website in folder.websites %}
-        <li>{{ website.name }}<!--<a href="/delete_website?wid={{ website.id }}">&nbsp;&nbsp;彻底删除</a>--><a href="/detail_website?wid={{ website.id  }}">&nbsp;&nbsp;详情</a></li>
+        <li><!--<a href="/delete_website?wid={{ website.id }}">&nbsp;&nbsp;彻底删除</a>--><a href="/detail_website?wid={{ website.id  }}">{{ website.name }}</a></li>
         {% if website.star == 1 %}
-            <!--<a href="/star?wid={{ website.id }}"><img src='https://raw.githubusercontent.com/ContraChen/picBed/master/img/202112281735013.png' width="24px" height="24px" border=0></a>-->
             <a href="/star?wid={{ website.id }}"><img src='http://img1.3png.com/418493cbb41f9ccf031bc9a81967f6878235.png' width="24px" height="24px" border=0></a>
         {% else %}
-            <!--<a href="/star?wid={{ website.id }}"><img src='https://raw.githubusercontent.com/ContraChen/picBed/master/img/202112281731903.png' width="24px" height="24px" border=0></a>-->
             <a href="/star?wid={{ website.id }}"><img src='http://img1.3png.com/7234936b4f9d4fc4dfc8532675596ea953b7.png' width="24px" height="24px" border=0></a>
         {% endif %}
         &nbsp;&nbsp;<a href={{ website.address }}>{{ website.address }}</a>
     {% endfor %}
 </ul>
+</div>
+</div>
+<div>
+    <video autoplay loop muted>
+        <source src="https://cdn.jsdelivr.net/gh/MobiusBeta/assets/videos/lime-live-wallpapers/Live4.mp4"  />
+        Your browser does not support the video tag.
+    </video>
 </div>
 </body>
 </html>

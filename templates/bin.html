@@ -9,37 +9,66 @@
             margin: 0;
         }
         .pg-header{
-            height: 48px;
+            height: 54px;
+            font-size: 42px;
             background-color: #8b8785;
             color: white;
+        }
+        video{
+            margin: 0px;
+            padding: 0px;
+            position: fixed;
+            right: 0px;
+            bottom: 0px;
+            min-width: 100%;
+            min-height: 100%;
+            height: auto;
+            width: auto;
+            /*加滤镜*/
+            /*filter: blur(15px); //背景模糊设置 */
+            /*-webkit-filter: grayscale(100%);*/
+            /*filter:grayscale(100%); //背景灰度设置*/
+            z-index:-11
+        }
+        ul{
+            background-color: rgba(93,216,224,0.18);
+            color: white;
+            border-color: chartreuse;
+            font-size: 20px;
         }
     </style>
     <meta charset="UTF-8">
     <title>回收站界面</title>
 </head>
 <body>
-    <div class="pg-header">
-    <div style="width: 150px;margin: auto">
-    <h1>回收站</h1>
-    </div>
-    </div>
-<hr>
-    <a href="/save"><div>收藏管理</div></a>
-        <ul>
-    {% for binfolder in binfolders %}
-        <li>{{ binfolder.name }}&nbsp;&nbsp;
-            <a href="/delete_binfolder?fid={{ binfolder.id  }}">彻底删除</a>&nbsp;&nbsp;
-            <a href="/restore_binfolder?fid={{ binfolder.id  }}"> 恢复收藏夹</a>
-        </li>
-        <ul>
-            {% for binwebsite in binfolder.binwebsites %}
-                <li>{{ binwebsite.name }} <a href="/delete_binwebsite?wid={{ binwebsite.id }}"> 彻底删除</a></li>
-                &nbsp;&nbsp;<a href={{ binwebsite.address }}>{{ binwebsite.address }}</a>
-            {% endfor %}
-        </ul>
-    {% endfor %}
+<div class="pg-header">
+    <div style="width: 200px;margin: auto">回收站</div>
+</div>
+<div style="width: 150px;margin:0 auto;">
+    <h3><a href="/save">回到收藏列表</a></h3>
+</div>
+<br><br><br>
+<div style="width: 500px;margin:0 auto;">
+<ul>
+{% for binfolder in binfolders %}
+    <li>{{ binfolder.name }}&nbsp;&nbsp;
+        <a href="/delete_binfolder?fid={{ binfolder.id  }}">彻底删除</a>&nbsp;&nbsp;
+        <a href="/restore_binfolder?fid={{ binfolder.id  }}"> 恢复收藏夹</a>
+    </li>
+    <ul>
+        {% for binwebsite in binfolder.binwebsites %}
+            <li>{{ binwebsite.name }} <a href="/delete_binwebsite?wid={{ binwebsite.id }}"> 彻底删除</a></li>
+            &nbsp;&nbsp;<a href={{ binwebsite.address }}>{{ binwebsite.address }}</a>
+        {% endfor %}
+    </ul>
+{% endfor %}
 </ul>
-
-
+</div>
+<div>
+    <video autoplay loop muted>
+        <source src="https://cdn.jsdelivr.net/gh/MobiusBeta/assets/videos/lime-live-wallpapers/Live4.mp4"  />
+        Your browser does not support the video tag.
+    </video>
+</div>
 </body>
 </html>

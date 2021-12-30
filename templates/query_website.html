@@ -3,16 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>网址详情</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        .pg-header{
+            height: 48px;
+            background-color: #8b8785;
+            color: white;
+        }
+        video{
+            margin: 0px;
+            padding: 0px;
+            position: fixed;
+            right: 0px;
+            bottom: 0px;
+            min-width: 100%;
+            min-height: 100%;
+            height: auto;
+            width: auto;
+            /*加滤镜*/
+            /*filter: blur(15px); //背景模糊设置 */
+            /*-webkit-filter: grayscale(100%);*/
+            /*filter:grayscale(100%); //背景灰度设置*/
+            z-index:-11
+        }
+        ul{
+            background-color: rgba(93,216,224,0.18);
+            color: black;
+            border-color: chartreuse;
+            font-size: 24px;
+        }
+        ul{
+            background-color: rgba(93,216,224,0.18);
+            color: black;
+            border-color: chartreuse;
+            font-size: 24px;
+        }
+    </style>
 </head>
 <body>
-<h3><a href="/save">回到收藏列表</a></h3>
+<div class="pg-header">
+<div style="width: 200px;margin:0 auto;">
 <h1>网址详情</h1>
+<h3><a href="/save">回到收藏列表</a></h3>
+</div>
+</div><br><br><br>
+<div style="width: 500px;margin:0 auto;">
+<ul>
 <div>
     <h3>{{website.name}}</h3>
     <p>{{website.address}}</p>
      <a href="/update_website?wid={{website.id}}">更新</a>
     <a href="/delete_website?wid={{website.id}}">删除</a>
 </div>
-
+</ul>
+    </div>
+<div>
+    <video autoplay loop muted>
+        <source src="https://cdn.jsdelivr.net/gh/MobiusBeta/assets/videos/lime-live-wallpapers/Live4.mp4"  />
+        Your browser does not support the video tag.
+    </video>
+</div>
 </body>
 </html>

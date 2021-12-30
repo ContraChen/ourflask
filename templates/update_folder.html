@@ -3,16 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <title>重命名收藏夹</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        video{
+            margin: 0px;
+            padding: 0px;
+            position: fixed;
+            right: 0px;
+            bottom: 0px;
+            min-width: 100%;
+            min-height: 100%;
+            height: auto;
+            width: auto;
+            /*加滤镜*/
+            /*filter: blur(15px); //背景模糊设置 */
+            /*-webkit-filter: grayscale(100%);*/
+            /*filter:grayscale(100%); //背景灰度设置*/
+            z-index:-11
+        }
+        source{
+            min-width: 100%;
+            min-height: 100%;
+            height: auto;
+            width: auto;
+        }
+		p{
+		    width: 100%;
+			text-align: center;
+			font-size: 40px;
+			color: white;
+		}
+        a{
+            color: white;
+            border-color: aquamarine;
+            font-size: 20px;
+        }
+        form{
+            background-color: rgba(93,216,224,0.18);
+            color: white;
+            border-color: chartreuse;
+            font-size: 24px;
+        }
+    </style>
 </head>
-<body style="margin: 0 auto">
+<br><br><br><br><br><br><br><br><br><br>
+<body style="width: 400px;margin: auto">
 <form method="post" action="/update_folder">
     <label>收藏夹名: </label>
     <input style="font-size: 20px" type="text" name="folder_name" value="{{ folder.name }}" placeholder="请输入收藏夹名">
     <br><br>
     <input type="hidden" name="fid" value="{{folder.id}}">
-    <br/>
-    <input type="submit" value="修改">
+    <input style="position:relative; left:140px; font-size: 20px" type="submit" value="修改">
 </form>
-
+<div>
+    <video autoplay loop muted>
+        <source src="https://cdn.jsdelivr.net/gh/MobiusBeta/assets/videos/lime-live-wallpapers/Live4.mp4"  />
+        Your browser does not support the video tag.
+    </video>
+</div>
 </body>
 </html>
